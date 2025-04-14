@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import { ApiSuccessResponse, ApiErrorResponse } from './types';
-import useAuth from './useAuth';
+import { TOKEN_KEY as tokenKey } from './useAuth';
 
 const axiosInstance = axios.create({
   baseURL: import.meta.env['VITE_API_BASE_URL'],
@@ -29,11 +29,11 @@ export async function makePostRequest(
 }
 
 export function setAuthToken(token: string | null) {
-  const { tokenKey } = useAuth();
-
   localStorage.setItem(tokenKey, token || '');
   if (!axiosInstance.defaults.headers.options || token === null) {
     axiosInstance.defaults.headers.options = {};
+    return;
   }
+
   axiosInstance.defaults.headers.options.Authorization = `Bearer ${token}`;
 }

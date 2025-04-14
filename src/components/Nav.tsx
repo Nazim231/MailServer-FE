@@ -11,6 +11,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuItem,
 } from '@/components/shadcn/dropdown-menu';
+import useAuth from '@/utils/useAuth';
 
 export type NavLinkProps = {
   title: string;
@@ -25,6 +26,7 @@ interface NavProps {
 }
 
 export function Nav({ links, isCollapsed }: NavProps) {
+  const { attemptLogout } = useAuth();
   return (
     <div
       data-collapsed={isCollapsed}
@@ -36,7 +38,9 @@ export function Nav({ links, isCollapsed }: NavProps) {
           <DropdownMenuLabel>My Account</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuItem>Profile</DropdownMenuItem>
-          <DropdownMenuItem className="text-destructive">Logout</DropdownMenuItem>
+          <DropdownMenuItem className="text-destructive" onClick={attemptLogout}>
+            Logout
+          </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
       <nav className="grid gap-1 px-2 group-[[data-collapsed=true]]:justify-center group-[[data-collapsed=true]]:px-2 border-t pt-4">

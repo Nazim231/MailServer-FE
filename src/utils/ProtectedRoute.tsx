@@ -1,14 +1,18 @@
-import { Navigate, Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import useAuth from './useAuth';
 import { Nav, NavLinkProps } from '@/components/Nav';
 import { File, Inbox, Plus, Send } from 'lucide-react';
+import { useEffect } from 'react';
 
 const ProtectedRoute = ({ redirectTo = '/login' }) => {
   const { isAuthenticated } = useAuth();
+  const navigateTo = useNavigate();
 
-  // if (!isAuthenticated) {
-  //   return <Navigate to={redirectTo} />;
-  // }
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigateTo(redirectTo);
+    }
+  }, [isAuthenticated]);
 
   const links: NavLinkProps[] = [
     {

@@ -12,8 +12,6 @@ export function Login() {
   const { isAuthenticated, attemptLogin } = useAuth();
   const navigateTo = useNavigate();
 
-  
-
   // Initial state for error and data
   const dataInitialState: Credentials = { email: '', password: '' };
   const errorInitialState: Errors<Credentials> = {};
@@ -23,7 +21,7 @@ export function Login() {
 
   useEffect(() => {
     if (isAuthenticated) navigateTo('/');
-  }, []);
+  }, [isAuthenticated]);
 
   const validCreds = (data: { email: string; password: string }): boolean => {
     const { success, error } = validateEmailPassword(data.email, data.password);
@@ -52,7 +50,7 @@ export function Login() {
   return (
     <div className="flex min-h-svh w-full items-center justify-center p-6 md:p-10">
       <div className="w-full max-w-sm">
-        <div className='flex flex-col gap-6'>
+        <div className="flex flex-col gap-6">
           <Card>
             <CardHeader>
               <CardTitle>Login to your account</CardTitle>

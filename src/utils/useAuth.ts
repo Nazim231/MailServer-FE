@@ -1,10 +1,13 @@
 import { useState } from 'react';
 import { makePostRequest, setAuthToken } from './axios';
 import { ApiErrorResponse, ApiResponse, ApiSuccessResponse, SignupForm } from './types';
+import { useNavigate } from 'react-router-dom';
 
+export const TOKEN_KEY = 'mailServerAuthToken';
 const useAuth = () => {
   const AUTH_STATUS_KEY = 'authenticated';
-  const TOKEN_KEY = 'mailServerAuthToken';
+
+  const navigateTo = useNavigate();
 
   // For Authentication
   const getAuthenticated = () => {
@@ -43,6 +46,7 @@ const useAuth = () => {
   const attemptLogout = () => {
     setAuthToken(null);
     saveAuthenticated(false);
+    navigateTo('/login');
   };
 
   return {
