@@ -17,3 +17,10 @@ export type ApiResponse = { success: boolean };
 export type ApiSuccessResponse = ApiResponse & { data: any };
 
 export type ApiErrorResponse = ApiResponse & { error: string };
+
+export type MailList = {
+  id: number;
+  from_name: string;
+  snippet: string;
+  created_at: Date;
+}

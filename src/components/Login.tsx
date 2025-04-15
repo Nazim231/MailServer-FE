@@ -20,7 +20,7 @@ export function Login() {
   const [error, setError] = useState<Errors<Credentials>>(errorInitialState);
 
   useEffect(() => {
-    if (isAuthenticated) navigateTo('/');
+    if (isAuthenticated) navigateTo('/inbox');
   }, [isAuthenticated]);
 
   const validCreds = (data: { email: string; password: string }): boolean => {

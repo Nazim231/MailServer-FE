@@ -18,28 +18,28 @@ const ProtectedRoute = ({ redirectTo = '/login' }) => {
     {
       title: 'Compose',
       icon: Plus,
-      variant: 'ghost',
+      link: '/compose',
     },
     {
       title: 'Inbox',
       label: '4',
       icon: Inbox,
-      variant: 'default',
+      link: '/inbox',
     },
     {
       title: 'Drafts',
       icon: File,
-      variant: 'ghost',
+      link: '/draft',
     },
     {
       title: 'Sent',
       icon: Send,
-      variant: 'ghost',
+      link: '/sent',
     },
   ];
 
   return (
-    <div className="flex h-screen">
+    <div className="flex h-svh w-screen overflow-hidden">
       <Nav links={links} isCollapsed={false} />
       <Outlet />
     </div>

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { makePostRequest, setAuthToken } from './axios';
 import { ApiErrorResponse, ApiResponse, ApiSuccessResponse, SignupForm } from './types';
 import { useNavigate } from 'react-router-dom';
@@ -8,6 +8,10 @@ const useAuth = () => {
   const AUTH_STATUS_KEY = 'authenticated';
 
   const navigateTo = useNavigate();
+
+  useEffect(() => {
+    setAuthToken(localStorage.getItem(TOKEN_KEY))
+  }, []);
 
   // For Authentication
   const getAuthenticated = () => {
