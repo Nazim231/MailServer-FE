@@ -1,4 +1,4 @@
-import { Errors, SignupForm } from "./types";
+import { ComposeMail, Errors, SignupForm } from './types';
 
 export function validateEmailPassword(email: string, password: string): { success: boolean; error: { email?: string; password?: string } } {
   const errors: { email?: string; password?: string } = {};
@@ -55,7 +55,54 @@ export function validateSignupForm(formData: SignupForm): { success: boolean; er
   return { success, error: errors };
 }
 
+export function validateComposeMailData(composeData: ComposeMail): { success: boolean; error: Errors<ComposeMail> } {
+  const errors: Errors<ComposeMail> = {};
+  const { to, cc, bcc, subject, body } = composeData;
+
+  // Helper function to validate email list
+  const validateEmailList = (emails: string | undefined, field: keyof ComposeMail) => {
+    if (emails) {
+      const emailList = emails.split(',').map((email) => email.trim());
+      const invalidEmails = emailList.filter((email) => !isValidEmail(email));
+      if (invalidEmails.length > 0) {
+        errors[field] = `Invalid email(s): ${invalidEmails.join(', ')}`;
+      }
+    }
+  };
+
+  // Validate 'to' field
+  if (!to) {
+    errors.to = 'Recipient (to) is required.';
+  } else {
+    validateEmailList(to, 'to');
+  }
+
+  // Validate 'cc' field
+  if (cc) {
+    validateEmailList(cc, 'cc');
+  }
+
+  // Validate 'bcc' field
+  if (bcc) {
+    validateEmailList(bcc, 'bcc');
+  }
+
+  // Validate subject
+  if (!subject) {
+    errors.subject = 'Subject is required.';
+  }
+
+  // Validate body
+  if (!body) {
+    errors.body = 'Body is required.';
+  }
+
+  // Determine success
+  const success = Object.keys(errors).length === 0;
+  return { success, error: errors };
+}
+
 // Utility function to validate email format
 function isValidEmail(email: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-}                         
+}

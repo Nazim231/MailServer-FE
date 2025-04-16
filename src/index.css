@@ -117,4 +117,11 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  .gmail_quote.gmail_quote_container {
+    @apply bg-card text-card-foreground border-t py-2 -mx-4 px-4;
+  }
+  .gmail_attr {
+    @apply text-xs text-gray-400;
+  }
 }

@@ -37,3 +37,20 @@ export type Mail = {
   is_read: boolean;
   created_at: Date;
 }
+
+export type ComposeMail = {
+  to: string;
+  cc?: string;
+  bcc?: string;
+  subject: string;
+  body: string;
+};
+
+export type ComposeMailPayload = {
+  to_emails: string[];
+  cc_emails?: string[];
+  bcc_emails?: string[];
+  subject: string;
+  body_html: string;
+  body_text: string;
+}

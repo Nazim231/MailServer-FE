@@ -34,7 +34,7 @@ const features = [
 const people = [
   {
     name: 'Nikhil Joshi',
-    role: 'Mail Artchitecture',
+    role: 'Mail Architecture',
     icon: User2,
   },
   {

@@ -1,7 +1,7 @@
 import { Outlet, useNavigate } from 'react-router-dom';
 import useAuth from './useAuth';
 import { Nav, NavLinkProps } from '@/components/Nav';
-import { File, Inbox, Plus, Send } from 'lucide-react';
+import { Inbox, Send } from 'lucide-react';
 import { useEffect } from 'react';
 
 const ProtectedRoute = ({ redirectTo = '/login' }) => {
@@ -16,19 +16,9 @@ const ProtectedRoute = ({ redirectTo = '/login' }) => {
 
   const links: NavLinkProps[] = [
     {
-      title: 'Compose',
-      icon: Plus,
-      link: '/compose',
-    },
-    {
       title: 'Inbox',
       icon: Inbox,
       link: '/inbox',
-    },
-    {
-      title: 'Drafts',
-      icon: File,
-      link: '/draft',
     },
     {
       title: 'Sent',

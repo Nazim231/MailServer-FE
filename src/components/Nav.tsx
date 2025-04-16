@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { LucideIcon, UserRound } from 'lucide-react';
+import { LucideIcon, Plus, UserRound } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { buttonVariants } from '@/components/shadcn/button';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/shadcn/tooltip';
@@ -12,6 +12,7 @@ import {
   DropdownMenuItem,
 } from '@/components/shadcn/dropdown-menu';
 import useAuth from '@/utils/useAuth';
+import Compose from './Compose';
 
 export type NavLinkProps = {
   title: string;
@@ -30,10 +31,7 @@ export function Nav({ links, isCollapsed }: NavProps) {
   const location = useLocation();
 
   return (
-    <div
-      data-collapsed={isCollapsed}
-      className="group flex flex-col w-1/6 pt-4  gap-4 data-[collapsed=true]:py-2 border-r"
-    >
+    <div data-collapsed={isCollapsed} className="group flex flex-col w-1/6 pt-4  gap-4 data-[collapsed=true]:py-2 border-r">
       <DropdownMenu>
         <DropdownMenuTrigger className="outline-0 border flex align-center gap-2 rounded-md py-2 px-3 select-none text-sm font-medium mx-2 text-left">
           <UserRound size={16} className="mt-[2px]" />
@@ -48,7 +46,15 @@ export function Nav({ links, isCollapsed }: NavProps) {
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
-      <nav className="grid gap-1 px-2 group-[[data-collapsed=true]]:justify-center group-[[data-collapsed=true]]:px-2 border-t pt-4">
+      <nav className="grid gap-1 px-2 group-[[data-collapsed=true]]:justify-center group-[[data-collapsed=true]]:px-2 border-t pt-2">
+        <Compose
+          trigger={
+            <div className="rounded-md flex items-center gap-1 p-2 text-sm text-white bg-indigo-600 cursor-pointer shadow-lg mb-4">
+              <Plus size={16} strokeWidth={3} className="text-white" />
+              <span className="">Compose</span>
+            </div>
+          }
+        />
         {links.map((link, index) => {
           const isActive = location.pathname === link.link;
           const variant = isActive ? 'default' : 'ghost';
