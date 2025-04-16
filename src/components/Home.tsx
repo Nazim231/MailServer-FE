@@ -9,8 +9,8 @@ import { LucideIcon, User2 } from 'lucide-react';
 
 const features = [
   {
-    name: 'NodeJS (Typescript)',
-    description: 'Powerful and efficient backend built with Node.js and TypeScript to handle high-volume email processing securely.',
+    name: 'NodeJS',
+    description: 'Powerful and efficient backend built with Node.js to handle high-volume email processing securely and reliably.',
     icon: NodeIcon,
   },
   {
@@ -137,12 +137,12 @@ export function Home() {
                 and success.
               </p>
               <div className="mt-10 flex items-center justify-center gap-x-6">
-                <a
-                  href="#"
+                <Link
+                  to="/inbox"
                   className="rounded-full bg-indigo-600 px-6 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 >
                   Start your journey <span aria-hidden="true">&rarr;</span>
-                </a>
+                </Link>
               </div>
             </div>
           </div>
