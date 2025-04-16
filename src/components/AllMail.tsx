@@ -4,9 +4,10 @@ import { ScrollArea } from '@/components/shadcn/scroll-area';
 import { InboxIcon, Loader2Icon } from 'lucide-react';
 import { makeGetRequest } from '@/utils/axios';
 
-export default function AllMail() {
+export default function AllMail({ setSelectedMail }: { setSelectedMail?: (mailId: number | null) => void }) {
   const [mails, setMails] = useState<MailList[]>([]);
   const [isLoading, setLoading] = useState(true);
+  const [selected, setSelected] = useState<number | null>(null);
 
   useEffect(() => {
     (async () => {
@@ -15,6 +16,15 @@ export default function AllMail() {
       setLoading(false);
     })();
   }, []);
+
+  const handleMailSelection = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const mailId = e.currentTarget.dataset.mailId;
+    const newSelected = selected == Number(mailId) ? null : Number(mailId);
+    setSelected(newSelected);
+    if (mailId) {
+      setSelectedMail && setSelectedMail(newSelected);
+    }
+  };
 
   return (
     <div className="border-r h-screen w-[calc(1.5/6*100%)]">
@@ -25,7 +35,12 @@ export default function AllMail() {
         mails.length > 0 ? (
           <ScrollArea className="p-2">
             {mails.map((mail) => (
-              <button className="border rounded-md p-2 w-full hover:bg-gray-50 cursor-pointer mb-2" key={mail.id} data-mail-id={mail.id}>
+              <button
+                className={`border rounded-md p-2 w-full ${selected == mail.id ? 'bg-gray-100' : 'hover:bg-gray-50'} cursor-pointer mb-2`}
+                onClick={handleMailSelection}
+                key={mail.id}
+                data-mail-id={mail.id}
+              >
                 <div className="flex items-center justify-between w-full">
                   <p className="font-medium text-sm">{mail.from_name}</p>
                   <p className="text-gray-400 text-xs">{new Date(mail.created_at).toDateString()}</p>

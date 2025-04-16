@@ -22,7 +22,6 @@ const ProtectedRoute = ({ redirectTo = '/login' }) => {
     },
     {
       title: 'Inbox',
-      label: '4',
       icon: Inbox,
       link: '/inbox',
     },

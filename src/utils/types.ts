@@ -24,3 +24,16 @@ export type MailList = {
   snippet: string;
   created_at: Date;
 }
+
+export type Mail = {
+  id: number;
+  from_name: string;
+  from_email: string;
+  subject: string;
+  body_html: string;
+  body_text: string;
+  snippet: string;
+  sent_datetime: Date;
+  is_read: boolean;
+  created_at: Date;
+}
